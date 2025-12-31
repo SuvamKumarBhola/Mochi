@@ -11,6 +11,7 @@ const themeStyles = {
         colon: 'text-gray-500',
         label: 'text-gray-400',
         timelineBg: 'bg-cyan-900/20',
+        consoleBg: 'bg-black/50 border-cyan-500/50 text-cyan-300 font-mono',
     },
     mochi: {
         bg: 'bg-pink-50',
@@ -24,6 +25,7 @@ const themeStyles = {
         colon: 'text-pink-300',
         label: 'text-pink-700',
         timelineBg: 'bg-pink-100/50',
+        consoleBg: 'bg-white/80 border-pink-300 text-pink-600 font-sans',
     }
 };
 

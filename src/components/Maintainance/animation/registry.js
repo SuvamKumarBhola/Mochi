@@ -1,18 +1,17 @@
-import CarCruise from './car/CarCruise'
-import CarRace from './car/CarRace'
-import CarDrift from './car/CarDrift'
-import MochiIdle from './mochi/MochiIdle'
-import MochiBounce from './mochi/MochiBounce'
-import MochiPanic from './mochi/MochiPanic'
-
+import { CarBMW, CarDodge, CarLambo, CarBugatti, CarPagani } from './car/cars';
+import { MochiPrep, MochiMix, MochiRise, MochiShape, MochiBake } from './mochi/mochi';
 
 const ANIMATION_REGISTRY = {
-    'car_cruise': CarCruise,
-    'car_race': CarRace,
-    'car_drift': CarDrift,
-    'mochi_idle': MochiIdle,
-    'mochi_bounce': MochiBounce,
-    'mochi_panic': MochiPanic
+    car_bmw: CarBMW,
+    car_dodge: CarDodge,
+    car_lambo: CarLambo,
+    car_bugatti: CarBugatti,
+    car_pagani: CarPagani,
+    mochi_prep: MochiPrep,
+    mochi_mix: MochiMix,
+    mochi_rise: MochiRise,
+    mochi_shape: MochiShape,
+    mochi_bake: MochiBake,
 };
 
 export default ANIMATION_REGISTRY;
