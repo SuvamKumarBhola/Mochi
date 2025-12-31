@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Settings, X, Calendar, Clock, Car, Cookie, Zap, Flag, Coffee, Flame, Smile, ArrowRight, Sparkles, Terminal, MessageCircle, Anchor, Layers, Gauge } from 'lucide-react';
 
-// ==============================================================================
-// 1. UTILS (src/utils/...)
-// ==============================================================================
 
-// --- FILE: src/utils/themeStyles.js ---
 const themeStyles = {
   car: {
-    bg: 'bg-gray-900', // Default, but overridden by dynamic background
+    bg: 'bg-gray-900', 
     textMain: 'text-white',
     textSub: 'text-cyan-400',
     modalBg: 'bg-gray-800 border-cyan-500',
@@ -37,29 +33,23 @@ const themeStyles = {
   }
 };
 
-// --- FILE: src/utils/timelineMatrix.js ---
 const TIMELINE_DATA = {
-  // Phase 1: 11-12+ months (BMW / Prep)
   luxury: {
     car: { id: 'car_bmw', label: 'Executive Class', icon: Car, desc: 'Smooth cruising. Systems nominal.', bgAccent: 'from-blue-900/40 to-cyan-900/40' },
     mochi: { id: 'mochi_prep', label: 'Sifting Flour', icon: Coffee, desc: 'Selecting the finest rice flour.' }
   },
-  // Phase 2: 9-10 months (Dodge / Mix)
   muscle: {
     car: { id: 'car_dodge', label: 'American Muscle', icon: Anchor, desc: 'Raw torque unleashed. Heavy lifting.', bgAccent: 'from-yellow-900/40 to-orange-900/40' },
     mochi: { id: 'mochi_mix', label: 'Heavy Mixing', icon: Layers, desc: 'Kneading the dough with energy!' }
   },
-  // Phase 3: 6-8 months (Ferrari/Lambo / Rise)
   super: {
     car: { id: 'car_lambo', label: 'Super Velocity', icon: Zap, desc: 'Aerodynamics engaged. Speed increasing.', bgAccent: 'from-red-900/40 to-rose-900/40' },
     mochi: { id: 'mochi_rise', label: 'Dough Rising', icon: Smile, desc: 'The mochi is puffing up nicely.' }
   },
-  // Phase 4: 3-5 months (Green Car / Shape)
   hyper: {
     car: { id: 'car_bugatti', label: 'Hyper Drive', icon: Gauge, desc: 'Breaking speed barriers. Maximum thrust.', bgAccent: 'from-green-900/40 to-emerald-900/40' },
     mochi: { id: 'mochi_shape', label: 'Shaping Form', icon: Cookie, desc: 'Molding the perfect round shapes.' }
   },
-  // Phase 5: 0-2 months (Vector Car / Bake)
   final: {
     car: { id: 'car_pagani', label: 'The Final Lap', icon: Flag, desc: 'Engineering perfection. Ready for launch.', bgAccent: 'from-slate-900/60 to-purple-900/40' },
     mochi: { id: 'mochi_bake', label: 'Final Bake', icon: Flame, desc: 'High heat! Golden crust forming!' }
@@ -74,11 +64,6 @@ const getPhase = (months) => {
   return 'luxury';
 };
 
-// ==============================================================================
-// 2. HOOKS (src/hooks/...)
-// ==============================================================================
-
-// --- FILE: src/hooks/useCountdown.js ---
 const useCountdown = (targetDateString) => {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
   const [monthsRemaining, setMonthsRemaining] = useState(12);
@@ -110,12 +95,7 @@ const useCountdown = (targetDateString) => {
   return { timeLeft, monthsRemaining };
 };
 
-// ==============================================================================
-// 3. LAYOUT (src/components/layout/...)
-// ==============================================================================
 
-// --- FILE: src/components/layout/Background.jsx ---
-// Updated to accept 'activeData' to set dynamic gradients based on the car
 const Background = ({ theme, activeData }) => {
   const carGradient = activeData?.bgAccent || 'from-gray-900 to-black';
 
@@ -123,12 +103,10 @@ const Background = ({ theme, activeData }) => {
     <div className={`absolute inset-0 pointer-events-none overflow-hidden transition-all duration-1000 bg-gradient-to-br ${theme === 'car' ? carGradient : 'from-pink-50 to-white'}`}>
       {theme === 'car' ? (
         <>
-          {/* Dynamic Glow Spotlights based on car color */}
           <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20 mix-blend-overlay"></div>
           <div className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] bg-white/5 rounded-full blur-[120px] mix-blend-overlay animate-pulse"></div>
           <div className="absolute bottom-[-20%] right-[-10%] w-[600px] h-[600px] bg-white/5 rounded-full blur-[120px] mix-blend-overlay animate-pulse delay-1000"></div>
 
-          {/* Speed Lines */}
           <div className="absolute inset-0 opacity-10" style={{ background: 'repeating-linear-gradient(90deg, transparent, transparent 50px, rgba(255,255,255,0.1) 50px, rgba(255,255,255,0.1) 51px)' }}></div>
         </>
       ) : (
@@ -142,7 +120,6 @@ const Background = ({ theme, activeData }) => {
   );
 };
 
-// --- FILE: src/components/layout/GlobalStyles.jsx ---
 const GlobalStyles = () => (
   <style>{`
     @keyframes drive-image { 0% { transform: translateY(0px) rotate(0deg); } 25% { transform: translateY(-1px) rotate(0.5deg); } 50% { transform: translateY(1px) rotate(0deg); } 75% { transform: translateY(-1px) rotate(-0.5deg); } 100% { transform: translateY(0px) rotate(0deg); } }
@@ -186,7 +163,6 @@ const CarImageBase = ({ src, alt, speed = 'normal' }) => (
         filter: 'drop-shadow(0 10px 10px rgba(0,0,0,0.5))',
         animationDuration: speed === 'fast' ? '0.3s' : '0.6s'
       }}
-      // Fallback in case image is missing in local dev
       onError={(e) => {
         e.target.onerror = null;
         e.target.style.display = 'none';
@@ -204,23 +180,23 @@ const CarImageBase = ({ src, alt, speed = 'normal' }) => (
 );
 
 const CarBMW = () => (
-  <CarImageBase src="/Mochi/BMW.png" alt="BMW Luxury" speed="normal" />
+  <CarImageBase src="/BMW.png" alt="BMW Luxury" speed="normal" />
 );
 const CarDodge = () => (
   <CarImageBase
-    src="/Mochi/ChevroletCamaro.png"
+    src="/ChevroletCamaro.png"
     alt="Muscle Car"
     speed="normal"
   />
 );
 const CarLambo = () => (
-  <CarImageBase src="/Mochi/FERRARI.png" alt="Super Car" speed="fast" />
+  <CarImageBase src="/FERRARI.png" alt="Super Car" speed="fast" />
 );
 const CarBugatti = () => (
-  <CarImageBase src="/Mochi/green.png" alt="Hyper Car" speed="fast" />
+  <CarImageBase src="/green.png" alt="Hyper Car" speed="fast" />
 );
 const CarPagani = () => (
-  <CarImageBase src="/Mochi/CarSide.png" alt="Final Evolution" speed="fast" />
+  <CarImageBase src="/CarSide.png" alt="Final Evolution" speed="fast" />
 );
 
 
