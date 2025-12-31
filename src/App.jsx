@@ -323,7 +323,7 @@ const AIStatusConsole = ({ theme, monthsRemaining, phase }) => {
     setLoading(true);
     setLog(null);
 
-    const apiKey = "55f35b6b-759b-4968-80d7-9dd6cc98b890"; 
+    const apiKey = ""; 
     const role = theme === 'car' ? "a futuristic cyber-mechanic AI" : "a cute, fluffy master baker AI";
     const context = theme === 'car' ? "upgrading a high-performance vehicle system" : "baking the ultimate mochi";
     const tone = theme === 'car' ? "technical, cool, cryptic, sci-fi" : "warm, bubbly, excited, cute";
